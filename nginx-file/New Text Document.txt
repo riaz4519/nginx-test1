@@ -12,27 +12,30 @@ http {
 
     server {
 
+        set $root_link "G:/development/devops/nginx-serve/nginx-test1";
+
+
         listen 8080;
-        root E:/developer/devops/test-aps/test1;
+        root $root_link;
 
         rewrite ^/number/(\w+) /count/$1;
         rewrite /data1 /fruits;
 
 
         location ~* /count/[0-9] {
-            root E:/developer/devops/test-aps/test1;
+            root $root_link;
             try_files /index.html =404;
         }
 
         location /fruits {
-            root E:/developer/devops/test-aps/test1;
+            root $root_link;
         }
         location /carbs {
-            alias E:/developer/devops/test-aps/test1/fruits;
+            alias $root_link/fruits;
         }
 
         location /vegetables {
-            root E:/developer/devops/test-aps/test1;
+            root $root_link;
             try_files /vegetables/veggies.html /index.html =404;
 
         }
